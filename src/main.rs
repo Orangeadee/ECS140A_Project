@@ -10,5 +10,5 @@ fn main() {
 
     let mut ex = CStream::new(args[1].as_str());
     ex.set_content();
-    println!("contents are: {}", ex.get_content());
+    println!("Contents are: {}", ex.get_content());
 }
