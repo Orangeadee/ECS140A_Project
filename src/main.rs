@@ -13,10 +13,13 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     println!("args: {:?}", args[1]);
 
-    let ex = CStream::new(args[1].as_str());
+    let mut ex = CStream::new(args[1].as_str());
     // ex.set_content();
     println!("Contents are: {}", ex.get_content());
     println!("Size is: {}", ex.get_size());
+    // while ex.more_available() {
+    //     println!("ch: {:?}", ex.get_next_char());
+    // }
 
     // let tk_ex = Token::new("hello".to_string(), TokenType::KEYWORD, -1, 0);
     // println!("{}", tk_ex.get_char_pos());
@@ -28,9 +31,7 @@ fn main() {
     // while sc_ex.more_avail() {
     //     println!("{:?}", sc_ex.get_next_token());
     // }
-    println!("{:?}", sc_ex.get_all_token());
+    // println!("{:?}", sc_ex.get_all_token());
+    sc_ex.get_all_token();
     // println!("{:?}", sc_ex.get_next_token());
-    
-    
-
 }

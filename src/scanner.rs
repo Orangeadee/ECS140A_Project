@@ -14,7 +14,8 @@ pub struct Scanner {
     operators: Vec<char>,
     eof: bool,
     digits: Vec<char>,
-    new_word: bool, // all_token: Vec<Token>
+    new_word: bool,
+    // total_token: Vec<Option<Token>>
 }
 
 impl Scanner {
@@ -41,7 +42,8 @@ impl Scanner {
             eof: false,
             operators: vec!['+', '-', '*', '/', '=', '>', '<', '!'],
             digits: vec!['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
-            new_word: false, // all_token: Vec<Token>::new()
+            new_word: false,
+            // total_token: Vec::new()
         }
     }
 
@@ -53,9 +55,9 @@ impl Scanner {
         self.content.get_content()
     }
 
-    fn check_eof(&mut self) -> bool {
-        let mut end = false;
-        while self.content.more_available() {
+    fn check_eof(&mut self) {
+        self.eof = false;
+        while self.more_avail() {
             match self.content.peek_next_char() {
                 Some(ch) => {
                     if !self.eof_chars.contains(&ch) {
@@ -63,34 +65,34 @@ impl Scanner {
                     } else {
                         if ch == '}' {
                             // self.content.get_next_char();
-                            end = true;
+                            // end = true;
+                            self.eof = true;
+                            self.content.get_next_char();
                         } else if ch == '\n' {
                             self.char_pos = 1;
                             self.line_num += 1;
+                            self.content.get_next_char();
+                        } else {
+                            self.content.get_next_char();
                         }
-                        self.content.get_next_char();
                     }
                 }
-                None => break,
+                None => break
             }
         }
-        return end;
     }
 
     pub fn get_next_token(&mut self) -> Option<Token> {
         let mut currType: TokenType = TokenType::START;
-        let mut curr = String::from("");
         let curr_char_pos: i32 = self.char_pos;
+        let mut curr = String::from("");
         let mut next_operator: bool = false;
         self.new_word = false;
 
-        self.eof = self.check_eof();
-        match self.eof {
-            true => {
-
-                return Some(Token::new(String::from(""), TokenType::START, 0, 0));
-            }
-            false => {}
+        // self.eof = self.check_eof();
+        self.check_eof();
+        if self.eof == true {
+            return Some(Token::new(String::from(""), TokenType::START, 0, 0));
         }
         // println!("curr type {}", currType);
         // println!("more avail? {}", self.content.more_available());
@@ -110,6 +112,7 @@ impl Scanner {
                                 self.new_word = true;
                                 // print!("{}", self.new_word);
                                 if self.digits.contains(&ch) {
+                                    // println!("{}",curr);
                                     currType = TokenType::INTCONSTANT;
                                 } else if self.operators.contains(&ch) {
                                     currType = TokenType::OPERATOR;
@@ -174,22 +177,36 @@ impl Scanner {
                     true => {
                         // println!("here..");
                         // println!("curr in true: {}",ch);
-                        self.char_pos += 1;
+                        // self.char_pos += 1;
                         if currType == TokenType::IDENTIFIER {
                             // println!("identifier");
                             if ch == '\n' {
                                 self.char_pos = 1;
                                 self.line_num += 1;
+                                break;
                             } else if ch == '(' {
                                 // println!("{}",curr);
-                                println!("{}",self.keyword_map.contains_key(&curr));
+                                // println!("{}",self.keyword_map.contains_key(&curr));
                                 if !self.keyword_map.contains_key(&curr) {
-                                    self.keyword_map.insert(curr.clone(), currType);
+                                    // self.keyword_map.insert(curr.clone(), currType);
                                     // println!("{:?}",self.keyword_map);
+                                    break;
+                                } else {
+                                    currType = TokenType::KEYWORD;
+                                    break;
                                 }
+                                
                             } else {
-                                break;
+                                if !self.keyword_map.contains_key(&curr) {
+                                    break;
+                                } else {
+                                    currType = TokenType::KEYWORD;
+                                    // println!("keyword");
+                                    break;
+                                }
                             }
+                        } else {
+                            break;
                         }
                     }
                 },
@@ -198,7 +215,7 @@ impl Scanner {
         }
         // println!("new word: {}", self.new_word);
         if self.new_word == true {
-            println!("current word: {}", &curr);
+            // println!("current word: {}", &curr);
             let next_token = Token::new(curr, currType, self.line_num, curr_char_pos);
             Some(next_token)
         } else {
@@ -206,15 +223,27 @@ impl Scanner {
         }
     }
 
-    pub fn get_all_token(&mut self) -> Option<Vec<Option<Token>>> {
+    // fn change_option(mut tokens: Option<Token>) -> Token{
+    //     let nxt = std::mem::replace(&mut tokens, None);
+    //     if let Some(se) = nxt {
+    //         se
+    //     } else {
+            
+    //     }
+    // }
+    pub fn get_all_token(&mut self) -> Vec<Token> {
         let mut all_token: Vec<Option<Token>> = Vec::new();
+        let mut result: Vec<Token> = Vec::new();
         while !self.content.get_content().is_empty() {
             let curr_token = self.get_next_token();
-            println!("{:?}",curr_token);
+            // println!("{:?}",curr_token);
             all_token.push(curr_token);
+            // self.total_token.push(curr_token);
         }
-
+        result = all_token.into_iter().filter(|x| x.is_some()).map(|x| x.unwrap()).collect();
+        println!("{:#?}",result);
         // println!("{}",self.get_contents());
-        Some(all_token)
+        // Some(all_token)
+        result
     }
 }
