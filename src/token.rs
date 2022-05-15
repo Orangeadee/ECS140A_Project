@@ -1,6 +1,6 @@
 use std::fmt;
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug)]
 pub enum TokenType {
     START,
     INTCONSTANT,
@@ -14,7 +14,7 @@ pub enum TokenType {
 impl fmt::Display for TokenType {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            TokenType::START => write!(f,"None"),
+            TokenType::START => write!(f,"Start"),
             TokenType::INTCONSTANT => write!(f,"IntConstant"),
             TokenType::FLOATCONSTANT => write!(f,"FloatConstant"),
             TokenType::KEYWORD => write!(f,"Keyword"),
@@ -25,7 +25,13 @@ impl fmt::Display for TokenType {
     }
 }
 
-#[derive(Clone)]
+impl PartialEq for TokenType {
+    fn eq(&self, other: &Self) -> bool {
+        self.to_string() == other.to_string()
+    }
+}
+
+#[derive(Clone, Debug)]
 pub struct Token {
     text: String,
     token_type: TokenType,

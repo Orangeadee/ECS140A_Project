@@ -15,13 +15,23 @@ pub struct CStream {
 
 impl CStream {
     pub fn new(f: &str) -> CStream {
-        CStream {
-            filename: f.to_string(),
-            line_num: -1,
-            char_pos: -1,
-            content: String::new(),
-            overall_pos: -1,
-            size: 0
+        match File::open(f) {
+            Ok(mut file) => {
+                let mut ct = String::new();
+                file.read_to_string(&mut ct).unwrap();
+                let temp_size = ct.chars().count() as i32;
+                CStream {
+                    filename: f.to_string(),
+                    line_num: -1,
+                    char_pos: -1,
+                    content: ct,
+                    overall_pos: -1,
+                    size: temp_size
+                }
+            }
+            Err(_) => {
+                panic!("Error opening file {}", f);
+            }
         }
     }
 
@@ -38,16 +48,20 @@ impl CStream {
             }
         }
     }
+    pub fn get_size(&self) -> i32 {
+        self.size
+    }
     pub fn get_content(&self) -> &String {
         &self.content
     }
 
     pub fn more_available(&self) -> bool {
-        self.overall_pos < self.size - 1
+        // self.overall_pos < self.size - 1
+        !self.content.is_empty()
     }
 
     pub fn get_cur_char(&self) -> Option<char> {
-        self.content.chars().nth((self.overall_pos) as usize)
+        self.content.chars().nth(0 as usize)
     }
 
     pub fn get_next_char(&mut self) -> Option<char> {
@@ -70,14 +84,30 @@ impl CStream {
             }
         }
         self.overall_pos += 1;
-        self.content.chars().nth((self.overall_pos) as usize)
+        
+        let temp_char = self.peek_next_char();
+        let mut temp_cont = self.content.chars();
+        if temp_char != None {
+            temp_cont.next();
+            self.content = String::from( temp_cont.as_str() );
+            temp_char
+        } else {
+            None
+        }
+        // self.content.chars().nth((self.overall_pos) as usize)
     }
 
     pub fn peek_next_char(&self) -> Option<char> {
-        self.content.chars().nth((self.overall_pos+1) as usize)
+        self.content.chars().nth(0 as usize)
     }
 
     pub fn peek_ahead_char(&self, k: i32) -> Option<char> {
-        self.content.chars().nth((self.overall_pos+k+1) as usize)
+        if k >= 0 {
+            self.content.chars().nth(k as usize)
+        } else {
+            None
+        }
+        
+        
     }
 }
