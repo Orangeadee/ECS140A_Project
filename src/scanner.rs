@@ -222,15 +222,7 @@ impl Scanner {
             None
         }
     }
-
-    // fn change_option(mut tokens: Option<Token>) -> Token{
-    //     let nxt = std::mem::replace(&mut tokens, None);
-    //     if let Some(se) = nxt {
-    //         se
-    //     } else {
-            
-    //     }
-    // }
+    
     pub fn get_all_token(&mut self) -> Vec<Token> {
         let mut all_token: Vec<Option<Token>> = Vec::new();
         let mut result: Vec<Token> = Vec::new();
