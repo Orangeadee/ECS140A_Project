@@ -9,13 +9,13 @@ pub struct Scanner {
     content: CStream,
     line_num: i32,
     char_pos: i32,
-    eof_chars: Vec<char>,
-    keyword_map: HashMap<String, TokenType>,
+    eof_chars: Vec<char>, // all chars that represents an end of checking a token
     operators: Vec<char>,
-    eof: bool,
+    eof: bool, // check if reach the end of the line or the block
     digits: Vec<char>,
     new_word: bool,
-    // total_token: Vec<Option<Token>>
+    total_token: Vec<Token>,
+    keywords: Vec<String>
 }
 
 impl Scanner {
@@ -25,25 +25,24 @@ impl Scanner {
             line_num: 1,
             char_pos: 1,
             eof_chars: vec!['{', '}', '(', ')', '\n', ';', '\t', ',', ' '],
-            keyword_map: HashMap::from([
-                (String::from("unsigned"), TokenType::KEYWORD),
-                (String::from("char"), TokenType::KEYWORD),
-                (String::from("short"), TokenType::KEYWORD),
-                (String::from("int"), TokenType::KEYWORD),
-                (String::from("long"), TokenType::KEYWORD),
-                (String::from("float"), TokenType::KEYWORD),
-                (String::from("double"), TokenType::KEYWORD),
-                (String::from("while"), TokenType::KEYWORD),
-                (String::from("if"), TokenType::KEYWORD),
-                (String::from("return"), TokenType::KEYWORD),
-                (String::from("void"), TokenType::KEYWORD),
-                (String::from("main"), TokenType::KEYWORD),
-            ]),
             eof: false,
             operators: vec!['+', '-', '*', '/', '=', '>', '<', '!'],
             digits: vec!['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
             new_word: false,
-            // total_token: Vec::new()
+            total_token: Vec::new(),
+            keywords: vec![
+                String::from("unsigned"),
+                String::from("char"),
+                String::from("short"),
+                String::from("int"),
+                String::from("long"),
+                String::from("float"),
+                String::from("double"),
+                String::from("while"),
+                String::from("if"),
+                String::from("return"),
+                String::from("main")
+            ]
         }
     }
 
@@ -187,7 +186,7 @@ impl Scanner {
                             } else if ch == '(' {
                                 // println!("{}",curr);
                                 // println!("{}",self.keyword_map.contains_key(&curr));
-                                if !self.keyword_map.contains_key(&curr) {
+                                if !self.keywords.contains(&curr) {
                                     // self.keyword_map.insert(curr.clone(), currType);
                                     // println!("{:?}",self.keyword_map);
                                     break;
@@ -197,7 +196,7 @@ impl Scanner {
                                 }
                                 
                             } else {
-                                if !self.keyword_map.contains_key(&curr) {
+                                if !self.keywords.contains(&curr) {
                                     break;
                                 } else {
                                     currType = TokenType::KEYWORD;
@@ -222,7 +221,7 @@ impl Scanner {
             None
         }
     }
-    
+
     pub fn get_all_token(&mut self) -> Vec<Token> {
         let mut all_token: Vec<Option<Token>> = Vec::new();
         let mut result: Vec<Token> = Vec::new();
