@@ -133,7 +133,8 @@ impl Scanner {
                             TokenType::FLOATCONSTANT => {
                                 if !self.digits.contains(&ch) {
                                     currType = TokenType::INVALID;
-                                    break;
+                                    curr.push(ch);
+                                    // break;
                                 } else {
                                     curr.push(ch);
                                 }
@@ -145,12 +146,14 @@ impl Scanner {
                                 } else if self.digits.contains(&ch) {
                                     curr.push(ch);
                                 } else {
+                                    curr.push(ch);
                                     currType = TokenType::INVALID;
-                                    break;
+                                    // break;
                                 }
                             }
                             TokenType::INVALID => {
-                                break;
+                                curr.push(ch);
+                                // break;
                             }
                             TokenType::OPERATOR => {
                                 break;

@@ -17,14 +17,14 @@ impl CStream {
     pub fn new(f: &str) -> CStream {
         match File::open(f) {
             Ok(mut file) => {
-                let mut ct = String::new();
-                file.read_to_string(&mut ct).unwrap();
-                let temp_size = ct.chars().count() as i32;
+                let mut temp_content = String::new();
+                file.read_to_string(&mut temp_content).unwrap();
+                let temp_size = temp_content.chars().count() as i32;
                 CStream {
                     filename: f.to_string(),
                     line_num: -1,
                     char_pos: -1,
-                    content: ct,
+                    content: temp_content,
                     overall_pos: -1,
                     size: temp_size
                 }
@@ -35,19 +35,19 @@ impl CStream {
         }
     }
 
-    pub fn set_content(&mut self) {
-        match File::open(self.filename.as_str()) {
-            Ok(mut file) => {
-                let mut temp_content = String::new();
-                file.read_to_string(&mut temp_content).unwrap();
-                self.content = temp_content;
-                self.size = self.content.chars().count() as i32;
-            }
-            Err(_) => {
-                panic!("Error open file {}", self.filename);
-            }
-        }
-    }
+    // pub fn set_content(&mut self) {
+    //     match File::open(self.filename.as_str()) {
+    //         Ok(mut file) => {
+    //             let mut temp_content = String::new();
+    //             file.read_to_string(&mut temp_content).unwrap();
+    //             self.content = temp_content;
+    //             self.size = self.content.chars().count() as i32;
+    //         }
+    //         Err(_) => {
+    //             panic!("Error open file {}", self.filename);
+    //         }
+    //     }
+    // }
     pub fn get_size(&self) -> i32 {
         self.size
     }
@@ -107,7 +107,5 @@ impl CStream {
         } else {
             None
         }
-        
-        
     }
 }

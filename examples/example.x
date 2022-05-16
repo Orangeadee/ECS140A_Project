@@ -1,4 +1,3 @@
-float Foo(int val);
 
-void main(float vel){
-    float Value;
+float Foo(int val){
+    float TestFloat = 1.4ab;
