@@ -35,6 +35,7 @@ fn main() {
     sc_ex.get_all_token();
     // println!("{:?}", sc_ex.get_next_token());
 
+    fun_program(ex);
 
 
 
