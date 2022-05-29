@@ -9,6 +9,13 @@ use cstream::*;
 use token::*;
 use scanner::*;
 
+extern crate custom_error;
+use custom_error::custom_error;
+
+custom_error!{MyError
+    Syntax{ln_num: i32, char_num: i32, ebnf: i32} = 
+        "Error at Line {ln_num} Character {char_num}. The syntax should be: {ebnf}"
+}
 fn main() {
     let args: Vec<String> = env::args().collect();
     println!("args: {:?}", args[1]);
@@ -37,23 +44,28 @@ fn main() {
 
     fun_program(ex);
 
-
+    match fun_program(ex) {
+        Ok(description) => match description{
+            true => return true
+        },
+        Err(err) => println!("{}", err),
+    }
 
     
-    fn fun_program(ex: CStream)-> bool{
+    fn fun_program(ex: CStream)-> Result<bool, MyError>{
         if fun_declaration(ex) == true {
             while !fun_declaration(ex) {
-                return false;
+                return Err(MyError::Syntax { ln_num: 10, char_num: 5, ebnf: 404 })
             }
             if fun_mainDeclaration(ex) == true&&fun_functionDefinition(ex) == true {
                 while !fun_functionDefinition(ex) {
-                    return false;
+                    return Err(MyError::Syntax { ln_num: 10, char_num: 5, ebnf: 404 })
                 }
             }
-            return true;
+            return Ok(true)
         }
         else{
-            return false;
+            return Err(MyError::Syntax { ln_num: 10, char_num: 5, ebnf: 404 })
         }
     }
 
