@@ -10,8 +10,8 @@
     - SID: 917071562
 - Group member 2:
     - Name: He Li
-    - Email:
-    - SID: 
+    - Email: heili@ucdavis.edu
+    - SID: 918426077
 
 ### Compile Command
 
