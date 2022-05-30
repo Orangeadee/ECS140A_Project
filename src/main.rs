@@ -35,6 +35,52 @@ fn main() {
     // println!("{}", tk_ex.get_token_type());
 
     let mut sc_ex = Scanner::new(args[1].as_str());
+    let mut ex1 = ex.clone();
+    let mut sc_ex1 = sc_ex.clone();
+    let mut ex2 = ex.clone();
+    let mut sc_ex2 = sc_ex.clone();
+    let mut ex3 = ex.clone();
+    let mut sc_ex3 = sc_ex.clone();
+    let mut ex4 = ex.clone();
+    let mut sc_ex4 = sc_ex.clone();
+    let mut ex5 = ex.clone();
+    let mut sc_ex5 = sc_ex.clone();
+    let mut ex6 = ex.clone();
+    let mut sc_ex6 = sc_ex.clone();
+    let mut ex7 = ex.clone();
+    let mut sc_ex7 = sc_ex.clone();
+    let mut ex8 = ex.clone();
+    let mut sc_ex8 = sc_ex.clone();
+    let mut ex9 = ex.clone();
+    let mut sc_ex9 = sc_ex.clone();
+    let mut ex10 = ex.clone();
+    let mut sc_ex10 = sc_ex.clone();
+    let mut ex11 = ex.clone();
+    let mut sc_ex11 = sc_ex.clone();
+    let mut ex12 = ex.clone();
+    let mut sc_ex12 = sc_ex.clone();
+    let mut ex13 = ex.clone();
+    let mut sc_ex13 = sc_ex.clone();
+    let mut ex14 = ex.clone();
+    let mut sc_ex14 = sc_ex.clone();
+    let mut ex15 = ex.clone();
+    let mut sc_ex15 = sc_ex.clone();
+    let mut ex16 = ex.clone();
+    let mut sc_ex16 = sc_ex.clone();
+    let mut ex17 = ex.clone();
+    let mut sc_ex17 = sc_ex.clone();
+    let mut ex18 = ex.clone();
+    let mut sc_ex18 = sc_ex.clone();
+    let mut ex19 = ex.clone();
+    let mut sc_ex19 = sc_ex.clone();
+    let mut ex20 = ex.clone();
+    let mut sc_ex20 = sc_ex.clone();
+    let mut ex21 = ex.clone();
+    let mut ex22 = ex.clone();
+    let mut ex23 = ex.clone();
+    let mut ex24 = ex.clone();
+    let mut ex25 = ex.clone();
+    let mut ex26 = ex.clone();
     //let mut to_ex = Token::new(args[1].as_str());
     // while sc_ex.more_avail() {
     //     println!("{:?}", sc_ex.get_next_token());
@@ -43,9 +89,9 @@ fn main() {
     sc_ex.get_all_token();
     // println!("{:?}", sc_ex.get_next_token());
 
-    fun_program(ex,sc_ex);
+    fun_program(ex1,sc_ex1);
 
-    match fun_program(ex, sc_ex) {
+    match fun_program(ex1, sc_ex1) {
         Ok(desc) => {
             if desc == true {
                 true;
@@ -57,7 +103,7 @@ fn main() {
             println!("{}",err)
         }
     }
-    match fun_declaration(ex,sc_ex) {
+    match fun_declaration(ex2,sc_ex2) {
         Ok(desc) => {
             if desc == true {
                 true;
@@ -69,7 +115,7 @@ fn main() {
             println!("{}",err)
         }
     }
-    match fun_mainDeclaration(ex,sc_ex) {
+    match fun_mainDeclaration(ex3,sc_ex3) {
         Ok(desc) => {
             if desc == true {
                 true;
@@ -81,7 +127,7 @@ fn main() {
             println!("{}",err)
         }
     }
-    match fun_functionDefinition(ex,sc_ex) {
+    match fun_functionDefinition(ex4,sc_ex4) {
         Ok(desc) => {
             if desc == true {
                 true;
@@ -93,7 +139,7 @@ fn main() {
             println!("{}",err)
         }
     }
-    match fun_declarationType(ex,sc_ex) {
+    match fun_declarationType(ex5,sc_ex5) {
         Ok(desc) => {
             if desc == true {
                 true;
@@ -105,7 +151,7 @@ fn main() {
             println!("{}",err)
         }
     }
-    match fun_variableDeclaration(ex,sc_ex) {
+    match fun_variableDeclaration(ex6,sc_ex6) {
         Ok(desc) => {
             if desc == true {
                 true;
@@ -117,7 +163,7 @@ fn main() {
             println!("{}",err)
         }
     }
-    match fun_functionDeclaration(ex,sc_ex) {
+    match fun_functionDeclaration(ex7,sc_ex7) {
         Ok(desc) => {
             if desc == true {
                 true;
@@ -129,7 +175,7 @@ fn main() {
             println!("{}",err)
         }
     }
-    match fun_block(ex,sc_ex) {
+    match fun_block(ex8,sc_ex8) {
         Ok(desc) => {
             if desc == true {
                 true;
@@ -141,7 +187,7 @@ fn main() {
             println!("{}",err)
         }
     }
-    match fun_parameterBlock(ex,sc_ex) {
+    match fun_parameterBlock(ex9,sc_ex9) {
         Ok(desc) => {
             if desc == true {
                 true;
@@ -153,7 +199,7 @@ fn main() {
             println!("{}",err)
         }
     }
-    match fun_dataType(ex) {
+    match fun_dataType(ex10) {
         Ok(desc) => {
             if desc == true {
                 true;
@@ -165,7 +211,7 @@ fn main() {
             println!("{}",err)
         }
     }
-    match fun_constant(ex,sc_ex) {
+    match fun_constant(ex11,sc_ex10) {
         Ok(desc) => {
             if desc == true {
                 true;
@@ -177,7 +223,7 @@ fn main() {
             println!("{}",err)
         }
     }
-    match fun_statement(ex,sc_ex) {
+    match fun_statement(ex12,sc_ex11) {
         Ok(desc) => {
             if desc == true {
                 true;
@@ -189,7 +235,7 @@ fn main() {
             println!("{}",err)
         }
     }
-    match fun_parameter(ex,sc_ex) {
+    match fun_parameter(ex13,sc_ex12) {
         Ok(desc) => {
             if desc == true {
                 true;
@@ -201,7 +247,7 @@ fn main() {
             println!("{}",err)
         }
     }
-    match fun_integerType(ex) {
+    match fun_integerType(ex14) {
         Ok(desc) => {
             if desc == true {
                 true;
@@ -213,7 +259,7 @@ fn main() {
             println!("{}",err)
         }
     }
-    match fun_floatType(ex) {
+    match fun_floatType(ex15) {
         Ok(desc) => {
             if desc == true {
                 true;
@@ -225,7 +271,7 @@ fn main() {
             println!("{}",err)
         }
     }
-    match fun_assignment(ex,sc_ex) {
+    match fun_assignment(ex16,sc_ex13) {
         Ok(desc) => {
             if desc == true {
                 true;
@@ -237,7 +283,7 @@ fn main() {
             println!("{}",err)
         }
     }
-    match fun_whileLoop(ex,sc_ex) {
+    match fun_whileLoop(ex17,sc_ex14) {
         Ok(desc) => {
             if desc == true {
                 true;
@@ -249,7 +295,7 @@ fn main() {
             println!("{}",err)
         }
     }
-    match fun_ifStatement(ex,sc_ex) {
+    match fun_ifStatement(ex18,sc_ex15) {
         Ok(desc) => {
             if desc == true {
                 true;
@@ -261,7 +307,7 @@ fn main() {
             println!("{}",err)
         }
     }
-    match fun_returnStatement(ex,sc_ex) {
+    match fun_returnStatement(ex19,sc_ex16) {
         Ok(desc) => {
             if desc == true {
                 true;
@@ -273,7 +319,7 @@ fn main() {
             println!("{}",err)
         }
     }
-    match fun_expression(ex,sc_ex) {
+    match fun_expression(ex20,sc_ex17) {
         Ok(desc) => {
             if desc == true {
                 true;
@@ -285,7 +331,7 @@ fn main() {
             println!("{}",err)
         }
     }
-    match fun_simpleExpression(ex,sc_ex) {
+    match fun_simpleExpression(ex21,sc_ex18) {
         Ok(desc) => {
             if desc == true {
                 true;
@@ -297,7 +343,7 @@ fn main() {
             println!("{}",err)
         }
     }
-    match fun_term(ex,sc_ex) {
+    match fun_term(ex22,sc_ex19) {
         Ok(desc) => {
             if desc == true {
                 true;
@@ -309,7 +355,7 @@ fn main() {
             println!("{}",err)
         }
     }
-    match fun_factor(ex,sc_ex) {
+    match fun_factor(ex23,sc_ex20) {
         Ok(desc) => {
             if desc == true {
                 true;
@@ -321,7 +367,7 @@ fn main() {
             println!("{}",err)
         }
     }
-    match fun_relationOperator(ex) {
+    match fun_relationOperator(ex24) {
         Ok(desc) => {
             if desc == true {
                 true;
@@ -333,7 +379,7 @@ fn main() {
             println!("{}",err)
         }
     }
-    match fun_addOperator(ex) {
+    match fun_addOperator(ex25) {
         Ok(desc) => {
             if desc == true {
                 true;
@@ -345,7 +391,7 @@ fn main() {
             println!("{}",err)
         }
     }
-    match fun_multOperator(ex) {
+    match fun_multOperator(ex26) {
         Ok(desc) => {
             if desc == true {
                 true;
@@ -357,6 +403,7 @@ fn main() {
             println!("{}",err)
         }
     }
+    
 
 }
     // match fun_program(ex) {
@@ -369,28 +416,45 @@ fn main() {
 
     
     fn fun_program(mut ex: CStream, mut sc_ex: Scanner)-> Result<bool, MyError>{
+        let mut ex2 = ex.clone();
+        let mut sc_ex2 = sc_ex.clone();
+        let mut ex3 = ex.clone();
+        let mut sc_ex3 = sc_ex.clone();
+        let mut ex4 = ex.clone();
+        let mut sc_ex4 = sc_ex.clone();
+        let mut ex5 = ex.clone();
+        let mut sc_ex5 = sc_ex.clone();
+        let mut sc_ex6 = sc_ex.clone();
+        let mut ex7 = ex.clone();
+        let mut sc_ex7 = sc_ex.clone();
+        let mut sc_ex8 = sc_ex.clone();
         if fun_declaration(ex,sc_ex).unwrap() == true {
-            while !fun_declaration(ex,sc_ex).unwrap() {
-                let mut curr = sc_ex.get_curr_token().unwrap();
+            
+            while !fun_declaration(ex2,sc_ex2).unwrap() {
+                let mut curr = sc_ex3.get_curr_token().unwrap();
                 //let mut to_ex = Token::new(ex.get_content(), sc_ex.get_curr_token(), curr.get_line_num(), curr.get_char_pos());
                 return Err(MyError::Syntax { ln_num: curr.get_line_num(), char_num: curr.get_char_pos(), ebnf: "Program := {DeclaRATION} mAINdECLARATION {fUNCTIONdEFINITION}".to_string()});
             }
-            if fun_mainDeclaration(ex,sc_ex).unwrap() == true&&fun_functionDefinition(ex,sc_ex).unwrap() == true {
-                while !fun_functionDefinition(ex,sc_ex).unwrap() {
-                    let mut curr = sc_ex.get_curr_token().unwrap();
+            if fun_mainDeclaration(ex4,sc_ex5).unwrap() == true&&fun_functionDefinition(ex3,sc_ex4).unwrap() == true {
+                while !fun_functionDefinition(ex7,sc_ex7).unwrap() {
+                    let mut curr = sc_ex6.get_curr_token().unwrap();
                     return Err(MyError::Syntax { ln_num: curr.get_line_num(), char_num: curr.get_char_pos(), ebnf: "Program := {DeclaRATION} mAINdECLARATION {fUNCTIONdEFINITION}".to_string() })
                 }
             }
             return Ok(true)
         }
         else{
-            let mut curr = sc_ex.get_curr_token().unwrap();
+            let mut curr = sc_ex8.get_curr_token().unwrap();
             return Err(MyError::Syntax { ln_num: curr.get_line_num(), char_num: curr.get_char_pos(), ebnf: "Program := {DeclaRATION} mAINdECLARATION {fUNCTIONdEFINITION}".to_string() })
         }
     }
 
     fn fun_declaration(ex: CStream, sc_ex: Scanner)-> Result<bool, MyError>{
-        if fun_declarationType(ex,sc_ex).unwrap() == true&&(fun_variableDeclaration(ex,sc_ex).unwrap() == true||fun_functionDeclaration(ex,sc_ex).unwrap() == true){
+        let mut ex1 = ex.clone();
+        let mut sc_ex1 = sc_ex.clone();
+        let mut ex2 = ex.clone();
+        let mut sc_ex2 = sc_ex.clone();
+        if fun_declarationType(ex,sc_ex).unwrap() == true&&(fun_variableDeclaration(ex1,sc_ex1).unwrap() == true||fun_functionDeclaration(ex2,sc_ex2).unwrap() == true){
             return Ok(true);
         }
         else{
@@ -399,11 +463,12 @@ fn main() {
     }
 
     fn fun_mainDeclaration(ex: CStream, sc_ex: Scanner)-> Result<bool, MyError>{
-        if ex.get_next_char()==Some('v')&&ex.get_next_char()==Some('o')
-        &&ex.get_next_char()==Some('i')&&ex.get_next_char()==Some('d')
-        &&ex.get_next_char()==Some('m')&&ex.get_next_char()==Some('a')
-        &&ex.get_next_char()==Some('i')&&ex.get_next_char()==Some('n')
-        &&ex.get_next_char()==Some('(')&&ex.get_next_char()==Some(')')
+        let mut ex1 = ex.clone();
+        if ex1.get_next_char()==Some('v')&&ex1.get_next_char()==Some('o')
+        &&ex1.get_next_char()==Some('i')&&ex1.get_next_char()==Some('d')
+        &&ex1.get_next_char()==Some('m')&&ex1.get_next_char()==Some('a')
+        &&ex1.get_next_char()==Some('i')&&ex1.get_next_char()==Some('n')
+        &&ex1.get_next_char()==Some('(')&&ex1.get_next_char()==Some(')')
         &&fun_block(ex,sc_ex).unwrap() ==true{
            return Ok(true);
         }
@@ -413,7 +478,12 @@ fn main() {
     }
 
     fn fun_functionDefinition(ex: CStream, sc_ex: Scanner)-> Result<bool, MyError>{
-        if fun_declarationType(ex,sc_ex).unwrap()==true&&fun_parameterBlock(ex,sc_ex).unwrap() == true&&fun_block(ex,sc_ex).unwrap() == true{
+        let mut ex1 = ex.clone();
+        let mut sc_ex1 = sc_ex.clone();
+        let mut ex2 = ex.clone();
+        let mut sc_ex2 = sc_ex.clone();
+   
+        if fun_declarationType(ex,sc_ex).unwrap()==true&&fun_parameterBlock(ex1,sc_ex1).unwrap() == true&&fun_block(ex2,sc_ex2).unwrap() == true{
             return Ok(true);
         }
         else{
@@ -430,7 +500,8 @@ fn main() {
         else{
             return false;
         } */
-        let temp_type = sc_ex.get_next_token().unwrap().get_token_type();
+        let mut sc_ex1 = sc_ex.clone();
+        let temp_type = sc_ex1.get_next_token().unwrap().get_token_type();
         
         if fun_dataType(ex).unwrap() == true&& *temp_type == TokenType::IDENTIFIER{
             return Ok(true);
@@ -441,14 +512,16 @@ fn main() {
     
     }
     fn fun_variableDeclaration(ex: CStream, sc_ex: Scanner)-> Result<bool, MyError>{
-        while !(ex.get_next_char() == Some(';')&& fun_constant(ex,sc_ex).unwrap() == true){
+        let mut ex1 = ex.clone();
+        while !(ex1.get_next_char() == Some(';')&& fun_constant(ex,sc_ex).unwrap() == true){
             return Ok(false);
         }
         return Ok(true);
     }
 
     fn fun_functionDeclaration(ex: CStream,sc_ex: Scanner)-> Result<bool, MyError>{
-        if fun_parameterBlock(ex,sc_ex).unwrap() == true&&ex.get_next_char() == Some(';'){
+        let mut ex1 = ex.clone();
+        if fun_parameterBlock(ex,sc_ex).unwrap() == true&&ex1.get_next_char() == Some(';'){
             return Ok(true);
         }
         else{
@@ -457,9 +530,15 @@ fn main() {
     }
 
     fn fun_block(ex: CStream, sc_ex: Scanner)-> Result<bool, MyError>{
-        if ex.get_next_char() == Some('{'){
-            while !(fun_declaration(ex,sc_ex).unwrap() == true&&fun_statement(ex,sc_ex).unwrap() == true
-            &&fun_functionDefinition(ex,sc_ex).unwrap() == true){
+        let mut ex1 = ex.clone();
+        let mut sc_ex1 = sc_ex.clone();
+        let mut ex2 = ex.clone();
+        let mut sc_ex2 = sc_ex.clone();
+        let mut ex3 = ex.clone();
+        let mut sc_ex3 = sc_ex.clone();
+        if ex1.get_next_char() == Some('{'){
+            while !(fun_declaration(ex,sc_ex).unwrap() == true&&fun_statement(ex2,sc_ex2).unwrap() == true
+            &&fun_functionDefinition(ex3,sc_ex3).unwrap() == true){
                 return Ok(false);
             }
         }
@@ -467,9 +546,22 @@ fn main() {
     }
 
     fn fun_parameterBlock(ex: CStream, sc_ex: Scanner)-> Result<bool, MyError>{
-        if ex.get_next_char() == Some('(')&&fun_parameter(ex,sc_ex).unwrap() == true&&ex.get_next_char() == Some(',')
-        &&fun_parameter(ex,sc_ex).unwrap() == true&&ex.get_next_char() == Some(')'){
-            while !(ex.get_next_char() == Some(',')&&fun_parameter(ex,sc_ex).unwrap() == true){
+        let mut ex1 = ex.clone();
+        let mut sc_ex1 = sc_ex.clone();
+        let mut ex2 = ex.clone();
+        let mut sc_ex2 = sc_ex.clone();
+        let mut ex3 = ex.clone();
+        let mut sc_ex3 = sc_ex.clone();
+        let mut ex4 = ex.clone();
+        let mut sc_ex4 = sc_ex.clone();
+        let mut ex5 = ex.clone();
+        let mut sc_ex5 = sc_ex.clone();
+        let mut ex6 = ex.clone();
+        let mut sc_ex6 = sc_ex.clone();
+        
+        if ex1.get_next_char() == Some('(')&&fun_parameter(ex,sc_ex).unwrap() == true&&ex2.get_next_char() == Some(',')
+        &&fun_parameter(ex3,sc_ex1).unwrap() == true&&ex4.get_next_char() == Some(')'){
+            while !(ex5.get_next_char() == Some(',')&&fun_parameter(ex6,sc_ex6).unwrap() == true){
                 return Ok(false);
             }
         }
@@ -477,7 +569,9 @@ fn main() {
     }
 
     fn fun_dataType(ex: CStream)-> Result<bool, MyError>{
-        if fun_integerType(ex).unwrap() == true&&fun_floatType(ex).unwrap() == true{
+        let mut ex7 = ex.clone();
+        
+        if fun_integerType(ex).unwrap() == true&&fun_floatType(ex7).unwrap() == true{
             return Ok(true);
         }
         else{
@@ -486,8 +580,12 @@ fn main() {
     }
 
     fn fun_constant(ex: CStream, sc_ex: Scanner)-> Result<bool, MyError>{
-        let temp_type1 = sc_ex.get_next_token().unwrap().get_token_type();
-        let temp_type2 = sc_ex.get_next_token().unwrap().get_token_type();
+        
+        let mut sc_ex7 = sc_ex.clone();
+        let mut sc_ex8 = sc_ex.clone();
+        
+        let temp_type1 = sc_ex7.get_next_token().unwrap().get_token_type();
+        let temp_type2 = sc_ex8.get_next_token().unwrap().get_token_type();
         if *temp_type1 == TokenType::INTCONSTANT && *temp_type2 == TokenType::FLOATCONSTANT{
             return Ok(true);
         }
@@ -497,9 +595,21 @@ fn main() {
     }
     
     fn fun_statement(ex: CStream, sc_ex: Scanner)-> Result<bool, MyError>{
-        if fun_assignment(ex,sc_ex).unwrap() == true&&fun_whileLoop(ex,sc_ex).unwrap() == true
-        &&fun_ifStatement(ex,sc_ex).unwrap() == true&&fun_returnStatement(ex,sc_ex).unwrap() == true
-        &&fun_expression(ex,sc_ex).unwrap() == true&&ex.get_next_char() == Some(';'){
+        let mut ex7 = ex.clone();
+        let mut sc_ex7 = sc_ex.clone();
+        let mut ex8 = ex.clone();
+        let mut sc_ex8 = sc_ex.clone();
+        let mut ex9 = ex.clone();
+        let mut sc_ex9 = sc_ex.clone();
+        let mut ex1 = ex.clone();
+        let mut sc_ex1 = sc_ex.clone();
+        let mut ex2 = ex.clone();
+        let mut sc_ex2 = sc_ex.clone();
+        let mut ex3 = ex.clone();
+        let mut sc_ex3 = sc_ex.clone();
+        if fun_assignment(ex7,sc_ex7).unwrap() == true&&fun_whileLoop(ex1,sc_ex1).unwrap() == true
+        &&fun_ifStatement(ex8,sc_ex8).unwrap() == true&&fun_returnStatement(ex2,sc_ex2).unwrap() == true
+        &&fun_expression(ex9,sc_ex9).unwrap() == true&&ex.get_next_char() == Some(';'){
             return Ok(true);
         }
         else{
@@ -508,7 +618,9 @@ fn main() {
     }
 
     fn fun_parameter(ex: CStream, sc_ex: Scanner)-> Result<bool, MyError>{
-        let temp_type = sc_ex.get_next_token().unwrap().get_token_type();
+        let mut ex7 = ex.clone();
+        let mut sc_ex7 = sc_ex.clone();
+        let temp_type = sc_ex7.get_next_token().unwrap().get_token_type();
         if fun_dataType(ex).unwrap() == true && *temp_type == TokenType::IDENTIFIER{
             return Ok(true);
         }
@@ -518,25 +630,66 @@ fn main() {
     }
 
     fn fun_integerType(ex: CStream)-> Result<bool, MyError>{
-        if ex.get_next_char()==Some('u')&&ex.get_next_char()==Some('n')
-        &&ex.get_next_char()==Some('s')&&ex.get_next_char()==Some('i')
-        &&ex.get_next_char()==Some('g')&&ex.get_next_char()==Some('n')
-        &&ex.get_next_char()==Some('e')&&ex.get_next_char()==Some('d'){
-            if ex.get_next_char()==Some('c')&&ex.get_next_char()==Some('h')
-            &&ex.get_next_char()==Some('a')&&ex.get_next_char()==Some('r'){
+        let mut ex1 = ex.clone();
+    
+    let mut ex2 = ex.clone();
+    let mut ex3 = ex.clone();
+    let mut ex4 = ex.clone();
+    let mut ex5 = ex.clone();
+    let mut ex6 = ex.clone();
+    let mut ex7 = ex.clone();
+    let mut ex8 = ex.clone();
+    let mut ex9 = ex.clone();
+    let mut ex10 = ex.clone();
+    let mut ex11 = ex.clone();
+    let mut ex12 = ex.clone();
+    let mut ex13 = ex.clone();
+    let mut ex14 = ex.clone();
+    let mut ex15 = ex.clone();
+    let mut ex16 = ex.clone();
+    let mut ex17 = ex.clone();
+    let mut ex18 = ex.clone();
+    let mut ex19 = ex.clone();
+    let mut ex20 = ex.clone();
+    let mut ex21 = ex.clone();
+    let mut ex22 = ex.clone();
+    let mut ex23 = ex.clone();
+    let mut ex24 = ex.clone();
+    let mut ex25 = ex.clone();
+    let mut ex26 = ex.clone();
+    let mut ex27 = ex.clone();
+    let mut ex28 = ex.clone();
+    let mut ex29 = ex.clone();
+    let mut ex30 = ex.clone();
+    let mut ex31 = ex.clone();
+    let mut ex32 = ex.clone();
+    let mut ex33 = ex.clone();
+    let mut ex34 = ex.clone();
+    let mut ex35 = ex.clone();
+    let mut ex36 = ex.clone();
+    let mut ex37 = ex.clone();
+    let mut ex38 = ex.clone();
+    let mut ex39 = ex.clone();
+    let mut ex40 = ex.clone();
+        if ex1.get_next_char()==Some('u')&&ex5.get_next_char()==Some('n')
+        &&ex2.get_next_char()==Some('s')&&ex6.get_next_char()==Some('i')
+        &&ex3.get_next_char()==Some('g')&&ex7.get_next_char()==Some('n')
+        &&ex4.get_next_char()==Some('e')&&ex8.get_next_char()==Some('d'){
+            if ex9.get_next_char()==Some('c')&&ex10.get_next_char()==Some('h')
+            &&ex11.get_next_char()==Some('a')&&ex12.get_next_char()==Some('r'){
                 return Ok(true);
             }
-            else if ex.get_next_char()==Some('s')&&ex.get_next_char()==Some('h')
-            &&ex.get_next_char()==Some('o')&&ex.get_next_char()==Some('r')
-            &&ex.get_next_char()==Some('t'){
+            else if ex13.get_next_char()==Some('s')&&ex14.get_next_char()==Some('h')
+            &&ex15.get_next_char()==Some('o')&&ex16.get_next_char()==Some('r')
+            &&ex17.get_next_char()==Some('t'){
                 return Ok(true);
             }
-            else if ex.get_next_char()==Some('i')&&ex.get_next_char()==Some('n')
-            &&ex.get_next_char()==Some('t'){
+            else if ex18.get_next_char()==Some('i')&&ex19.get_next_char()==Some('n')
+            &&ex20.get_next_char()==Some('t'){
                 return Ok(true);
             }
-            else if ex.get_next_char()==Some('l')&&ex.get_next_char()==Some('o')
-            &&ex.get_next_char()==Some('n')&&ex.get_next_char()==Some('g'){
+            else if ex21.get_next_char()==Some('l')&&ex22.get_next_char()==Some('o')
+            &&ex23.get_next_char()==Some('n')&&ex24.get_next_char()==Some('g'){
                 return Ok(true);
             }
             else{
@@ -544,21 +697,21 @@ fn main() {
             }
             
         }
-        if ex.get_next_char()==Some('c')&&ex.get_next_char()==Some('h')
-            &&ex.get_next_char()==Some('a')&&ex.get_next_char()==Some('r'){
+        if ex25.get_next_char()==Some('c')&&ex26.get_next_char()==Some('h')
+            &&ex27.get_next_char()==Some('a')&&ex28.get_next_char()==Some('r'){
                 return Ok(true);
             }
-            else if ex.get_next_char()==Some('s')&&ex.get_next_char()==Some('h')
-            &&ex.get_next_char()==Some('o')&&ex.get_next_char()==Some('r')
-            &&ex.get_next_char()==Some('t'){
+            else if ex29.get_next_char()==Some('s')&&ex30.get_next_char()==Some('h')
+            &&ex31.get_next_char()==Some('o')&&ex32.get_next_char()==Some('r')
+            &&ex33.get_next_char()==Some('t'){
                 return Ok(true);
             }
-            else if ex.get_next_char()==Some('i')&&ex.get_next_char()==Some('n')
-            &&ex.get_next_char()==Some('t'){
+            else if ex34.get_next_char()==Some('i')&&ex35.get_next_char()==Some('n')
+            &&ex36.get_next_char()==Some('t'){
                 return Ok(true);
             }
-            else if ex.get_next_char()==Some('l')&&ex.get_next_char()==Some('o')
-            &&ex.get_next_char()==Some('n')&&ex.get_next_char()==Some('g'){
+            else if ex37.get_next_char()==Some('l')&&ex38.get_next_char()==Some('o')
+            &&ex39.get_next_char()==Some('n')&&ex40.get_next_char()==Some('g'){
                 return Ok(true);
             }
             else{
@@ -568,14 +721,25 @@ fn main() {
     }
 
     fn fun_floatType(ex: CStream)-> Result<bool, MyError>{
-        if ex.get_next_char()==Some('f')&&ex.get_next_char()==Some('l')
-        &&ex.get_next_char()==Some('o')&&ex.get_next_char()==Some('a')
-        &&ex.get_next_char()==Some('t'){
+        let mut ex1 = ex.clone();
+        let mut ex2 = ex.clone();
+        let mut ex3 = ex.clone();
+        let mut ex4 = ex.clone();
+        let mut ex5 = ex.clone();
+        let mut ex6 = ex.clone();
+        let mut ex7 = ex.clone();
+        let mut ex8 = ex.clone();
+        let mut ex9 = ex.clone();
+        let mut ex10 = ex.clone();
+        let mut ex11 = ex.clone();
+        if ex1.get_next_char()==Some('f')&&ex2.get_next_char()==Some('l')
+        &&ex3.get_next_char()==Some('o')&&ex4.get_next_char()==Some('a')
+        &&ex5.get_next_char()==Some('t'){
             return Ok(true);
         }
-        else if ex.get_next_char()==Some('d')&&ex.get_next_char()==Some('o')
-        &&ex.get_next_char()==Some('u')&&ex.get_next_char()==Some('b')
-        &&ex.get_next_char()==Some('l')&&ex.get_next_char()==Some('e'){
+        else if ex6.get_next_char()==Some('d')&&ex7.get_next_char()==Some('o')
+        &&ex8.get_next_char()==Some('u')&&ex9.get_next_char()==Some('b')
+        &&ex10.get_next_char()==Some('l')&&ex11.get_next_char()==Some('e'){
             return Ok(true);
         }
         else {
@@ -584,13 +748,19 @@ fn main() {
     }
     
     fn fun_assignment(ex: CStream, sc_ex: Scanner)-> Result<bool, MyError>{
-        
-        let temp_type1 = sc_ex.get_next_token().unwrap().get_token_type();
-        let temp_type2 = sc_ex.get_next_token().unwrap().get_token_type();
-        let temp_type3 = sc_ex.get_next_token().unwrap().get_token_type();
-        if *temp_type1 == TokenType::IDENTIFIER&&ex.get_next_char()==Some('=')
-        && *temp_type2 == TokenType::IDENTIFIER&&ex.get_next_char()==Some('='){
-            while *sc_ex.get_next_token().unwrap().get_token_type() == TokenType::IDENTIFIER&&ex.get_next_char()==Some('=') {
+        let mut ex1 = ex.clone();
+        let mut sc_ex1 = sc_ex.clone();
+        let mut ex2 = ex.clone();
+        let mut sc_ex2 = sc_ex.clone();
+        let mut ex3 = ex.clone();
+        let mut sc_ex3 = sc_ex.clone();
+        let mut sc_ex4 = sc_ex.clone();
+        let temp_type1 = sc_ex1.get_next_token().unwrap().get_token_type();
+        let temp_type2 = sc_ex2.get_next_token().unwrap().get_token_type();
+        let temp_type3 = sc_ex3.get_next_token().unwrap().get_token_type();
+        if *temp_type1 == TokenType::IDENTIFIER&&ex1.get_next_char()==Some('=')
+        && *temp_type2 == TokenType::IDENTIFIER&&ex2.get_next_char()==Some('='){
+            while *sc_ex4.get_next_token().unwrap().get_token_type() == TokenType::IDENTIFIER&&ex.get_next_char()==Some('=') {
                 return Ok(false);
             } 
             return Ok(true);
