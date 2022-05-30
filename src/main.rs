@@ -321,7 +321,7 @@ fn main() {
             println!("{}",err)
         }
     }
-    match fun_relationOperator(ex,sc_ex) {
+    match fun_relationOperator(ex) {
         Ok(desc) => {
             if desc == true {
                 true;
@@ -333,7 +333,7 @@ fn main() {
             println!("{}",err)
         }
     }
-    match fun_addOperator(ex,sc_ex) {
+    match fun_addOperator(ex) {
         Ok(desc) => {
             if desc == true {
                 true;
@@ -345,7 +345,7 @@ fn main() {
             println!("{}",err)
         }
     }
-    match fun_multOperator(ex,sc_ex) {
+    match fun_multOperator(ex) {
         Ok(desc) => {
             if desc == true {
                 true;
@@ -369,12 +369,12 @@ fn main() {
 
     
     fn fun_program(ex: CStream, mut sc_ex: Scanner)-> Result<bool, MyError>{
-        if fun_declaration(ex,sc_ex) == true {
+        if fun_declaration(ex,sc_ex).unwrap() == true {
             while !fun_declaration(ex,sc_ex) {
 
                 return Err(MyError::Syntax { ln_num: token_type.get_line_num(), char_num: token_type.get_char_pos(), ebnf: 123 })
             }
-            if fun_mainDeclaration(ex,sc_ex) == true&&fun_functionDefinition(ex,sc_ex) == true {
+            if fun_mainDeclaration(ex,sc_ex).unwrap() == true&&fun_functionDefinition(ex,sc_ex).unwrap() == true {
                 while !fun_functionDefinition(ex,sc_ex) {
                     return Err(MyError::Syntax { ln_num: token_type.get_line_num(), char_num: token_type.get_char_pos(), ebnf: 123 })
                 }
@@ -387,11 +387,11 @@ fn main() {
     }
 
     fn fun_declaration(ex: CStream, sc_ex: Scanner)-> Result<bool, MyError>{
-        if fun_declarationType(ex,sc_ex) == true&&(fun_variableDeclaration(ex,sc_ex) == true||fun_functionDeclaration(ex,sc_ex) == true){
+        if fun_declarationType(ex,sc_ex).unwrap() == true&&(fun_variableDeclaration(ex,sc_ex).unwrap() == true||fun_functionDeclaration(ex,sc_ex).unwrap() == true){
             return Ok(true);
         }
         else{
-            return false;
+            return Ok(false);
         }
     }
 
@@ -401,20 +401,20 @@ fn main() {
         &&ex.get_next_char()==Some('m')&&ex.get_next_char()==Some('a')
         &&ex.get_next_char()==Some('i')&&ex.get_next_char()==Some('n')
         &&ex.get_next_char()==Some('(')&&ex.get_next_char()==Some(')')
-        &&fun_block(ex,sc_ex) == Some(true){
+        &&fun_block(ex,sc_ex).unwrap() ==true{
            return Ok(true);
         }
         else{
-            return false;
+            return Ok(false);
         }
     }
 
     fn fun_functionDefinition(ex: CStream, sc_ex: Scanner)-> Result<bool, MyError>{
-        if fun_declarationType(ex,sc_ex)==true&&fun_parameterBlock(ex,sc_ex) == true&&fun_block(ex,sc_ex) == true{
+        if fun_declarationType(ex,sc_ex).unwrap()==true&&fun_parameterBlock(ex,sc_ex).unwrap() == true&&fun_block(ex,sc_ex).unwrap() == true{
             return Ok(true);
         }
         else{
-            return false;
+            return Ok(false);
         }
     }
 
@@ -429,56 +429,56 @@ fn main() {
         } */
         let temp_type = sc_ex.get_next_token().unwrap().get_token_type();
         
-        if fun_dataType(ex) == true&& *temp_type == TokenType::IDENTIFIER{
+        if fun_dataType(ex).unwrap() == true&& *temp_type == TokenType::IDENTIFIER{
             return Ok(true);
         }
         else{
-            return false;
+            return Ok(false);
         } 
     
     }
     fn fun_variableDeclaration(ex: CStream, sc_ex: Scanner)-> Result<bool, MyError>{
-        while !(ex.get_next_char() == Some(';')&& fun_constant(ex,sc_ex) == true){
-            return false;
+        while !(ex.get_next_char() == Some(';')&& fun_constant(ex,sc_ex).unwrap() == true){
+            return Ok(false);
         }
         return Ok(true);
     }
 
     fn fun_functionDeclaration(ex: CStream,sc_ex: Scanner)-> Result<bool, MyError>{
-        if fun_parameterBlock(ex,sc_ex) == true&&ex.get_next_char() == Some(';'){
+        if fun_parameterBlock(ex,sc_ex).unwrap() == true&&ex.get_next_char() == Some(';'){
             return Ok(true);
         }
         else{
-            return false;
+            return Ok(false);
         }
     }
 
     fn fun_block(ex: CStream, sc_ex: Scanner)-> Result<bool, MyError>{
         if ex.get_next_char() == Some('{'){
-            while !(fun_declaration(ex,sc_ex) == true&&fun_statement(ex,sc_ex) == true
-        &&fun_functionDefinition(ex,sc_ex) == true){
-                return false;
+            while !(fun_declaration(ex,sc_ex).unwrap() == true&&fun_statement(ex,sc_ex).unwrap() == true
+            &&fun_functionDefinition(ex,sc_ex).unwrap() == true){
+                return Ok(false);
             }
         }
         return Ok(true);
     }
 
     fn fun_parameterBlock(ex: CStream, sc_ex: Scanner)-> Result<bool, MyError>{
-        if ex.get_next_char() == Some('(')&&fun_parameter(ex,sc_ex) == true&&ex.get_next_char() == Some(',')
-        &&fun_parameter(ex,sc_ex) == true&&ex.get_next_char() == Some(')'){
-            while !(ex.get_next_char() == Some(',')&&fun_parameter(ex,sc_ex) == true){
-                return false;
+        if ex.get_next_char() == Some('(')&&fun_parameter(ex,sc_ex).unwrap() == true&&ex.get_next_char() == Some(',')
+        &&fun_parameter(ex,sc_ex).unwrap() == true&&ex.get_next_char() == Some(')'){
+            while !(ex.get_next_char() == Some(',')&&fun_parameter(ex,sc_ex).unwrap() == true){
+                return Ok(false);
             }
         }
         return Ok(true);
     }
 
     fn fun_dataType(ex: CStream)-> Result<bool, MyError>{
-        if fun_integerType(ex) == true&&fun_floatType(ex) == true{
+        if fun_integerType(ex).unwrap() == true&&fun_floatType(ex).unwrap() == true{
             return Ok(true);
         }
         else{
-            return false;
+            return Ok(false);
         }
     }
 
@@ -489,28 +489,28 @@ fn main() {
             return Ok(true);
         }
         else{
-            return false;
+            return Ok(false);
         }
     }
     
     fn fun_statement(ex: CStream, sc_ex: Scanner)-> Result<bool, MyError>{
-        if fun_assignment(ex,sc_ex) == true&&fun_whileLoop(ex,sc_ex) == true
-        &&fun_ifStatement(ex,sc_ex) == true&&fun_returnStatement(ex,sc_ex) == true
-        &&fun_expression(ex,sc_ex) == true&&ex.get_next_char() == Some(';'){
+        if fun_assignment(ex,sc_ex).unwrap() == true&&fun_whileLoop(ex,sc_ex).unwrap() == true
+        &&fun_ifStatement(ex,sc_ex).unwrap() == true&&fun_returnStatement(ex,sc_ex).unwrap() == true
+        &&fun_expression(ex,sc_ex).unwrap() == true&&ex.get_next_char() == Some(';'){
             return Ok(true);
         }
         else{
-            return false;
+            return Ok(false);
         }
     }
 
     fn fun_parameter(ex: CStream, sc_ex: Scanner)-> Result<bool, MyError>{
         let temp_type = sc_ex.get_next_token().unwrap().get_token_type();
-        if fun_dataType(ex) == true && *temp_type == TokenType::IDENTIFIER{
+        if fun_dataType(ex).unwrap() == true && *temp_type == TokenType::IDENTIFIER{
             return Ok(true);
         }
         else{
-            return false;
+            return Ok(false);
         }
     }
 
@@ -537,7 +537,7 @@ fn main() {
                 return Ok(true);
             }
             else{
-                return false;
+                return Ok(false);
             }
             
         }
@@ -559,7 +559,7 @@ fn main() {
                 return Ok(true);
             }
             else{
-                return false;
+                return Ok(false);
             }
         
     }
@@ -576,49 +576,47 @@ fn main() {
             return Ok(true);
         }
         else {
-            return false;
+            return Ok(false);
         }
     }
     
     fn fun_assignment(ex: CStream, sc_ex: Scanner)-> Result<bool, MyError>{
-        /*
+        
         let temp_type1 = sc_ex.get_next_token().unwrap().get_token_type();
         let temp_type2 = sc_ex.get_next_token().unwrap().get_token_type();
         let temp_type3 = sc_ex.get_next_token().unwrap().get_token_type();
         if *temp_type1 == TokenType::IDENTIFIER&&ex.get_next_char()==Some('=')
         && *temp_type2 == TokenType::IDENTIFIER&&ex.get_next_char()==Some('='){
-            // 这里不是很明白要怎么改，所以我就不改啦
             while *sc_ex.get_next_token().unwrap().get_token_type() == TokenType::IDENTIFIER&&ex.get_next_char()==Some('=') {
-                return false;
+                return Ok(false);
             } 
-            return true;
+            return Ok(true);
         }
-        return false;
-         */
-        return Ok(true); 
+        return Ok(false);
+        
     }
     
     fn fun_whileLoop(ex: CStream, sc_ex: Scanner)-> Result<bool, MyError>{
         if ex.get_next_char()==Some('w')&&ex.get_next_char()==Some('h')
         &&ex.get_next_char()==Some('i')&&ex.get_next_char()==Some('l')
         &&ex.get_next_char()==Some('e')
-        &&ex.get_next_char()==Some('(')&&fun_expression(ex,sc_ex) == true
-        &&ex.get_next_char()==Some(')')&&fun_block(ex,sc_ex) == true {
+        &&ex.get_next_char()==Some('(')&&fun_expression(ex,sc_ex).unwrap() == true
+        &&ex.get_next_char()==Some(')')&&fun_block(ex,sc_ex).unwrap() == true {
            return Ok(true);
         }
         else {
-            return false;
+            return Ok(false);
         }
     }
     
     fn fun_ifStatement(ex: CStream, sc_ex: Scanner)-> Result<bool, MyError>{
         if ex.get_next_char()==Some('i')&&ex.get_next_char()==Some('f')
-        &&ex.get_next_char()==Some('(')&&fun_expression(ex,sc_ex) == true
-        &&ex.get_next_char()==Some(')')&&fun_block(ex,sc_ex) == true{
+        &&ex.get_next_char()==Some('(')&&fun_expression(ex,sc_ex).unwrap() == true
+        &&ex.get_next_char()==Some(')')&&fun_block(ex,sc_ex).unwrap() == true{
            return Ok(true);
         }
         else {
-            return false;
+            return Ok(false);
         }
     }
     
@@ -626,32 +624,32 @@ fn main() {
         if ex.get_next_char()==Some('r')&&ex.get_next_char()==Some('e')
         &&ex.get_next_char()==Some('t')&&ex.get_next_char()==Some('u')
         &&ex.get_next_char()==Some('r')&&ex.get_next_char()==Some('n')
-        &&fun_expression(ex,sc_ex) == true&&ex.get_next_char()==Some(';'){
+        &&fun_expression(ex,sc_ex).unwrap() == true&&ex.get_next_char()==Some(';'){
             return Ok(true);
         }
         else {
-            return false;
+            return Ok(false);
         }
     }
     
     fn fun_expression(ex: CStream, sc_ex: Scanner)-> Result<bool, MyError>{
-        if fun_simpleExpression(ex,sc_ex) == true {
-            while !(fun_multOperator(ex) == true||fun_multOperator(ex)==true) {
-                return false;
+        if fun_simpleExpression(ex,sc_ex).unwrap() == true {
+            while !(fun_multOperator(ex).unwrap() == true||fun_multOperator(ex).unwrap()==true) {
+                return Ok(false);
             }
         }
         return Ok(true);
     }
     
     fn fun_simpleExpression(ex: CStream, sc_ex: Scanner)-> Result<bool, MyError>{
-        if fun_term(ex,sc_ex) == true {
-            if fun_addOperator(ex) == true&&fun_term(ex,sc_ex)==true{
-                while !fun_addOperator(ex) == true||!fun_term(ex,sc_ex)==true {
-                    return false;
+        if fun_term(ex,sc_ex).unwrap() == true {
+            if fun_addOperator(ex).unwrap() == true&&fun_term(ex,sc_ex).unwrap()==true{
+                while !fun_addOperator(ex).unwrap() == true||!fun_term(ex,sc_ex).unwrap()==true {
+                    return Ok(false);
                 }
             }
             else{
-                return false;
+                return Ok(false);
             }
             
         }
@@ -659,14 +657,14 @@ fn main() {
     }
     
     fn fun_term(ex: CStream, sc_ex: Scanner)-> Result<bool, MyError>{
-        if fun_factor(ex,sc_ex) == true {
-            if fun_multOperator(ex) == true||fun_multOperator(ex)==true{
-                while !fun_multOperator(ex) == true||!fun_multOperator(ex)==true {
-                    return false;
+        if fun_factor(ex,sc_ex).unwrap() == true {
+            if fun_multOperator(ex).unwrap() == true||fun_multOperator(ex).unwrap()==true{
+                while !fun_multOperator(ex).unwrap() == true||!fun_multOperator(ex).unwrap()==true {
+                    return Ok(false);
                 }
             }
             else{
-                return false;
+                return Ok(false);
             }
             
         }
@@ -681,7 +679,7 @@ fn main() {
             let temp_type3 = sc_ex.get_next_token().unwrap().get_token_type();
             if *temp_type3 == TokenType::IDENTIFIER {
                 if ex.get_next_char()==Some('('){
-                    if fun_expression(ex,sc_ex)==true{
+                    if fun_expression(ex,sc_ex).unwrap()==true{
                         if ex.get_next_char()==Some(')'){
                                 return Ok(true);
                             }
@@ -690,7 +688,7 @@ fn main() {
                     return Ok(true);
                 }
             }
-        return false;
+        return Ok(false);
     }
     fn fun_relationOperator(ex: CStream)->Result<bool, MyError>{
         if ex.get_next_char()==Some('=')&&ex.peek_next_char()==Some('=')
@@ -704,18 +702,18 @@ fn main() {
         else if ex.get_next_char()==Some('<')||ex.get_next_char()==Some('>'){
             return Ok(true);
         }
-        return false;  
+        return Ok(false);  
     }
     fn fun_addOperator(ex: CStream)-> Result<bool, MyError>{
         if ex.get_next_char()==Some('+')||ex.get_next_char()==Some('-'){
             return Ok(true);
         }
-        return false;      
+        return Ok(false);      
     }
     fn fun_multOperator(ex: CStream)-> Result<bool, MyError>{
         if ex.get_next_char()==Some('*')||ex.get_next_char()==Some('/') {
             return Ok(true);
         }  
-        return false; 
+        return Ok(false); 
     }
 
