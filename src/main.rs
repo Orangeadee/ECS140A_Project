@@ -371,8 +371,6 @@ fn main() {
     fn fun_program(ex: CStream, mut sc_ex: Scanner)-> Result<bool, MyError>{
         if fun_declaration(ex,sc_ex) == true {
             while !fun_declaration(ex,sc_ex) {
-                //let nextToken = sc_ex.get_next_token();
-                //return Err(MyError::Syntax { ln_num: nextToken, char_num: token_type.get_char_pos(), ebnf: 123 })
 
                 return Err(MyError::Syntax { ln_num: token_type.get_line_num(), char_num: token_type.get_char_pos(), ebnf: 123 })
             }
