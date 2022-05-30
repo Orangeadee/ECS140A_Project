@@ -1,4 +1,4 @@
-#![cfg_attr(debug_assertions, allow(dead_code, unused_imports))]
+#![cfg_attr(debug_assertions, allow(dead_code, unused_imports, unused_assignments, unused_mut))]
 use std::env;
 use std::fmt::format;
 use std::fs::File;
@@ -25,34 +25,44 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     println!("args: {:?}", args[1]);
 
+    // ==================================================== //
+    // ************* Testing for Stage1 ******************* //
     let mut ex = CStream::new(args[1].as_str());
-    // ex.set_content();
     println!("Contents are: {}", ex.get_content());
     println!("Size is: {}", ex.get_size());
-    // while ex.more_available() {
-    //     println!("ch: {:?}", ex.get_next_char());
-    // }
+    while ex.more_available() {
+        println!("ch: {:?}", ex.get_next_char());
+    }
 
-    // let tk_ex = Token::new("hello".to_string(), TokenType::KEYWORD, -1, 0);
-    // println!("{}", tk_ex.get_char_pos());
-    // println!("{}", tk_ex.get_text());
-    // println!("{}", tk_ex.get_line_num());
-    // println!("{}", tk_ex.get_token_type());
+    let tk_ex = Token::new("hello".to_string(), TokenType::KEYWORD, -1, 0);
+    println!("{}", tk_ex.get_char_pos());
+    println!("{}", tk_ex.get_text());
+    println!("{}", tk_ex.get_line_num());
+    println!("{}", tk_ex.get_token_type());
+    // ***************** End Testing ********************** //
+    // ==================================================== //
+
 
     // ==================================================== //
-    // 这是我的测试
+    // ************* Testing for Stage2 ******************* //
     let mut sc_ex = Scanner::new(args[1].as_str());
-    // sc_ex.get_next_token();
-    // println!("{:?}",sc_ex.get_curr_token());
+    sc_ex.get_next_token();
+    println!("{:?}",sc_ex.get_curr_token());
+    // ***************** End Testing ********************** //
+    // ==================================================== //
+
+    // ==================================================== //
+    // ************* Testing for Stage4 ******************* //
     let mut xhtml = XHTML::new(sc_ex.get_all_token());
-    // println!("{}",xhtml.get_str())
     xhtml.all_output();
     let mut file_no = 1;
     let data = xhtml.get_str();
     let path = format!("./example{}.xhtml",file_no);
+    file_no+=1;
     let mut f = File::create(path).expect("unable to create file");
     f.write_all(data.as_bytes()).expect("unable to write data");
-    // println!("{:?}",sc_ex.get_curr_token());
+    println!("{:?}",sc_ex.get_curr_token());
+    // ***************** End Testing ********************** //
     // ==================================================== //
 
     //let mut to_ex = Token::new(args[1].as_str());
