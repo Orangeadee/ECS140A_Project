@@ -29,7 +29,9 @@ You can run the program by using `cargo run ./examples/example#.x` command where
 - In `scanner.rs`, we implemented functions `get_next_token()`, `get_curr_token()`, and `get_all_token`. All of them can properly function and ready to be tested.
 
 ###### Stage3
-- 
+- Functions definition is under the main function. 
+- Each ebnf statement defines a method, fun_program() can recurvisely call each method crossponding to ebnf statement.
+- The custom error will output crosponding ebnf statement, line_num, and char_pos. 
 
 ###### Stage4
 - Since stage3 couldn't be done, we assume the syntax is correct and output a partial `.html` file.
