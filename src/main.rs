@@ -1,18 +1,13 @@
-#![cfg_attr(debug_assertions, allow(dead_code, unused_imports, unused_assignments, unused_mut))]
+#![cfg_attr(debug_assertions, allow(dead_code, unused_imports))]
 use std::env;
-use std::fmt::format;
-use std::fs::File;
-use std::io::Write;
 
 mod cstream;
 mod token;
 mod scanner;
-mod xhtml;
 
 use cstream::*;
 use token::*;
 use scanner::*;
-use xhtml::*;
 
 extern crate custom_error;
 use custom_error::custom_error;
@@ -25,52 +20,20 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     println!("args: {:?}", args[1]);
 
-    // ==================================================== //
-    // ************* Testing for Stage1 ******************* //
-    let mut cst = CStream::new(args[1].as_str());
-    println!("Contents are: {}", cst.get_content());
-    println!("Size is: {}", cst.get_size());
-    while cst.more_available() {
-        println!("ch: {:?}", cst.get_next_char());
-    }
-
-    let tk_ex = Token::new("hello".to_string(), TokenType::KEYWORD, -1, 0);
-    println!("{}", tk_ex.get_char_pos());
-    println!("{}", tk_ex.get_text());
-    println!("{}", tk_ex.get_line_num());
-    println!("{}", tk_ex.get_token_type());
-    // ***************** End Testing ********************** //
-    // ==================================================== //
-
-
-    // ==================================================== //
-    // ************* Testing for Stage2 ******************* //
-    let mut sc_ex = Scanner::new(args[1].as_str());
-    sc_ex.get_next_token();
-    println!("{:?}",sc_ex.get_curr_token());
-    // ***************** End Testing ********************** //
-    // ==================================================== //
-
-    // ==================================================== //
-    // ************* Testing for Stage4 ******************* //
-    let mut xhtml = XHTML::new(sc_ex.get_all_token());
-    xhtml.all_output();
-    let mut file_no = 1;
-    let data = xhtml.get_str();
-    let path = format!("./example{}.xhtml",file_no);
-    file_no+=1;
-    let mut f = File::create(path).expect("unable to create file");
-    f.write_all(data.as_bytes()).expect("unable to write data");
-    println!("{:?}",sc_ex.get_curr_token());
-    // ***************** End Testing ********************** //
-    // ==================================================== //
-
-    // ==================================================== //
-    // *************** Begin of Stage3 ******************** //
-
-    /* Please comment out all of the below to test previous stages */
-    /* */
     let mut ex = CStream::new(args[1].as_str());
+    // ex.set_content();
+    println!("Contents are: {}", ex.get_content());
+    println!("Size is: {}", ex.get_size());
+    // while ex.more_available() {
+    //     println!("ch: {:?}", ex.get_next_char());
+    // }
+
+    // let tk_ex = Token::new("hello".to_string(), TokenType::KEYWORD, -1, 0);
+    // println!("{}", tk_ex.get_char_pos());
+    // println!("{}", tk_ex.get_text());
+    // println!("{}", tk_ex.get_line_num());
+    // println!("{}", tk_ex.get_token_type());
+
     let mut sc_ex = Scanner::new(args[1].as_str());
     let mut ex1 = ex.clone();
     let mut sc_ex1 = sc_ex.clone();
@@ -126,7 +89,7 @@ fn main() {
     sc_ex.get_all_token();
     // println!("{:?}", sc_ex.get_next_token());
 
-    fun_program(ex,sc_ex);
+    fun_program(ex1,sc_ex1);
 
     match fun_program(ex1, sc_ex1) {
         Ok(desc) => {
@@ -807,11 +770,27 @@ fn main() {
     }
     
     fn fun_whileLoop(ex: CStream, sc_ex: Scanner)-> Result<bool, MyError>{
-        if ex.get_next_char()==Some('w')&&ex.get_next_char()==Some('h')
-        &&ex.get_next_char()==Some('i')&&ex.get_next_char()==Some('l')
-        &&ex.get_next_char()==Some('e')
-        &&ex.get_next_char()==Some('(')&&fun_expression(ex,sc_ex).unwrap() == true
-        &&ex.get_next_char()==Some(')')&&fun_block(ex,sc_ex).unwrap() == true {
+        let mut ex1 = ex.clone();
+        let mut sc_ex1 = sc_ex.clone();
+        let mut ex2 = ex.clone();
+        let mut sc_ex2 = sc_ex.clone();
+        let mut ex3 = ex.clone();
+        let mut sc_ex3 = sc_ex.clone();
+        let mut ex5 = ex.clone();
+        let mut sc_ex5 = sc_ex.clone();
+        let mut ex6 = ex.clone();
+        let mut sc_ex6 = sc_ex.clone();
+        let mut ex7 = ex.clone();
+        let mut sc_ex7 = sc_ex.clone();
+        let mut ex8 = ex.clone();
+        let mut sc_ex8 = sc_ex.clone();
+        let mut ex9 = ex.clone();
+        let mut ex10 = ex.clone();
+        if ex1.get_next_char()==Some('w')&&ex9.get_next_char()==Some('h')
+        &&ex2.get_next_char()==Some('i')&&ex10.get_next_char()==Some('l')
+        &&ex3.get_next_char()==Some('e')
+        &&ex8.get_next_char()==Some('(')&&fun_expression(ex6,sc_ex1).unwrap() == true
+        &&ex5.get_next_char()==Some(')')&&fun_block(ex7,sc_ex2).unwrap() == true {
            return Ok(true);
         }
         else {
@@ -820,9 +799,20 @@ fn main() {
     }
     
     fn fun_ifStatement(ex: CStream, sc_ex: Scanner)-> Result<bool, MyError>{
-        if ex.get_next_char()==Some('i')&&ex.get_next_char()==Some('f')
-        &&ex.get_next_char()==Some('(')&&fun_expression(ex,sc_ex).unwrap() == true
-        &&ex.get_next_char()==Some(')')&&fun_block(ex,sc_ex).unwrap() == true{
+        let mut ex1 = ex.clone();
+        let mut sc_ex1 = sc_ex.clone();
+        let mut ex2 = ex.clone();
+        let mut sc_ex2 = sc_ex.clone();
+        let mut ex3 = ex.clone();
+        let mut ex5 = ex.clone();
+        let mut ex6 = ex.clone();
+        let mut ex7 = ex.clone();
+        let mut ex8 = ex.clone();
+        let mut ex9 = ex.clone();
+        let mut ex10 = ex.clone();
+        if ex1.get_next_char()==Some('i')&&ex2.get_next_char()==Some('f')
+        &&ex3.get_next_char()==Some('(')&&fun_expression(ex5,sc_ex1).unwrap() == true
+        &&ex7.get_next_char()==Some(')')&&fun_block(ex6,sc_ex2).unwrap() == true{
            return Ok(true);
         }
         else {
@@ -831,10 +821,22 @@ fn main() {
     }
     
     fn fun_returnStatement(ex: CStream, sc_ex: Scanner)-> Result<bool, MyError>{
-        if ex.get_next_char()==Some('r')&&ex.get_next_char()==Some('e')
-        &&ex.get_next_char()==Some('t')&&ex.get_next_char()==Some('u')
-        &&ex.get_next_char()==Some('r')&&ex.get_next_char()==Some('n')
-        &&fun_expression(ex,sc_ex).unwrap() == true&&ex.get_next_char()==Some(';'){
+        let mut ex1 = ex.clone();
+        let mut sc_ex1 = sc_ex.clone();
+        let mut ex2 = ex.clone();
+        let mut ex3 = ex.clone();
+        let mut ex4 = ex.clone();
+        let mut ex5 = ex.clone();
+        let mut ex6 = ex.clone();
+        let mut ex7 = ex.clone();
+        let mut ex8 = ex.clone();
+        let mut ex9 = ex.clone();
+        let mut ex10 = ex.clone();
+        let mut ex11 = ex.clone();
+        if ex1.get_next_char()==Some('r')&&ex4.get_next_char()==Some('e')
+        &&ex2.get_next_char()==Some('t')&&ex5.get_next_char()==Some('u')
+        &&ex3.get_next_char()==Some('r')&&ex6.get_next_char()==Some('n')
+        &&fun_expression(ex7,sc_ex1).unwrap() == true&&ex8.get_next_char()==Some(';'){
             return Ok(true);
         }
         else {
@@ -843,8 +845,12 @@ fn main() {
     }
     
     fn fun_expression(ex: CStream, sc_ex: Scanner)-> Result<bool, MyError>{
-        if fun_simpleExpression(ex,sc_ex).unwrap() == true {
-            while !(fun_multOperator(ex).unwrap() == true||fun_multOperator(ex).unwrap()==true) {
+        let mut ex1 = ex.clone();
+        let mut sc_ex1 = sc_ex.clone();
+        let mut ex2 = ex.clone();
+        let mut ex3 = ex.clone();
+        if fun_simpleExpression(ex1,sc_ex1).unwrap() == true {
+            while !(fun_multOperator(ex2).unwrap() == true||fun_multOperator(ex3).unwrap()==true) {
                 return Ok(false);
             }
         }
@@ -852,9 +858,21 @@ fn main() {
     }
     
     fn fun_simpleExpression(ex: CStream, sc_ex: Scanner)-> Result<bool, MyError>{
-        if fun_term(ex,sc_ex).unwrap() == true {
-            if fun_addOperator(ex).unwrap() == true&&fun_term(ex,sc_ex).unwrap()==true{
-                while !fun_addOperator(ex).unwrap() == true||!fun_term(ex,sc_ex).unwrap()==true {
+        let mut ex1 = ex.clone();
+        let mut sc_ex1 = sc_ex.clone();
+        let mut ex2 = ex.clone();
+        let mut sc_ex2 = sc_ex.clone();
+        let mut ex3 = ex.clone();
+        let mut sc_ex3 = sc_ex.clone();
+        let mut ex5 = ex.clone();
+        let mut ex6 = ex.clone();
+        let mut ex7 = ex.clone();
+        let mut ex8 = ex.clone();
+        let mut ex9 = ex.clone();
+        let mut ex10 = ex.clone();
+        if fun_term(ex1,sc_ex1).unwrap() == true {
+            if fun_addOperator(ex2).unwrap() == true&&fun_term(ex3,sc_ex2).unwrap()==true{
+                while !fun_addOperator(ex).unwrap() == true||!fun_term(ex5,sc_ex3).unwrap()==true {
                     return Ok(false);
                 }
             }
@@ -867,9 +885,21 @@ fn main() {
     }
     
     fn fun_term(ex: CStream, sc_ex: Scanner)-> Result<bool, MyError>{
-        if fun_factor(ex,sc_ex).unwrap() == true {
-            if fun_multOperator(ex).unwrap() == true||fun_multOperator(ex).unwrap()==true{
-                while !fun_multOperator(ex).unwrap() == true||!fun_multOperator(ex).unwrap()==true {
+        let mut ex1 = ex.clone();
+        let mut sc_ex1 = sc_ex.clone();
+        let mut ex2 = ex.clone();
+        let mut sc_ex2 = sc_ex.clone();
+        let mut ex3 = ex.clone();
+        let mut sc_ex3 = sc_ex.clone();
+        let mut ex5 = ex.clone();
+        let mut ex6 = ex.clone();
+        let mut ex7 = ex.clone();
+        let mut ex8 = ex.clone();
+        let mut ex9 = ex.clone();
+        let mut ex10 = ex.clone();
+        if fun_factor(ex1,sc_ex1).unwrap() == true {
+            if fun_multOperator(ex2).unwrap() == true||fun_multOperator(ex3).unwrap()==true{
+                while !fun_multOperator(ex6).unwrap() == true||!fun_multOperator(ex5).unwrap()==true {
                     return Ok(false);
                 }
             }
@@ -924,6 +954,6 @@ fn main() {
         if ex.get_next_char()==Some('*')||ex.get_next_char()==Some('/') {
             return Ok(true);
         }  
-        return Ok(false); /* */
+        return Ok(false); 
     }
 
