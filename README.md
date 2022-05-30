@@ -1,4 +1,4 @@
-# ECS140A_Project
+# ECS140A Project
 
 ### Due Date
 05/29/2022
@@ -44,4 +44,3 @@ You can run the program by using `cargo run ./examples/example#.x` command where
 - [Changing `Vec<Option<Token>>` to `Vec<Token>`](https://stackoverflow.com/questions/30588549/how-do-i-convert-a-list-of-optiont-to-a-list-of-t-when-t-cannot-be-copied)
 - [Using match function instead of `if-else` statements](https://stackoverflow.com/questions/37814942/early-breaking-from-rusts-match)
 - [PartialEq for comparing struct types](https://doc.rust-lang.org/std/cmp/trait.PartialEq.html)
-- 
