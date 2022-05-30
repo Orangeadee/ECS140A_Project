@@ -15,7 +15,9 @@ pub struct Scanner {
     digits: Vec<char>,
     new_word: bool,
     total_token: Vec<Token>,
-    keywords: Vec<String>
+    keywords: Vec<String>,
+    token_count: i32,
+    all_token: Vec<Token>
 }
 
 impl Scanner {
@@ -42,7 +44,9 @@ impl Scanner {
                 String::from("if"),
                 String::from("return"),
                 String::from("main")
-            ]
+            ],
+            token_count: -1,
+            all_token: Vec::new()
         }
     }
 
@@ -81,6 +85,16 @@ impl Scanner {
         }
     }
 
+    pub fn get_curr_token(&self) -> Option<Token> {
+        // if self.total_token.get(self.token_count as usize).is_none() {
+        //     None
+        // } else {
+        //     Some(self.total_token.swap_remove(self.token_count as usize))
+        // }
+        let vec = self.all_token.clone();
+        let res = vec.into_iter().nth(self.token_count as usize);
+        res
+    }
     pub fn get_next_token(&mut self) -> Option<Token> {
         let mut currType: TokenType = TokenType::START;
         let curr_char_pos: i32 = self.char_pos;
@@ -219,7 +233,11 @@ impl Scanner {
         if self.new_word == true {
             // println!("current word: {}", &curr);
             let next_token = Token::new(curr, currType, self.line_num, curr_char_pos);
-            Some(next_token)
+            let res = next_token.clone();
+            // let temp_token = Token::new(curr, currType, self.line_num, curr_char_pos);
+            self.all_token.push(next_token);
+            self.token_count+=1;
+            Some(res)
         } else {
             None
         }
